@@ -1,0 +1,105 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Protección de la UEFI de mi PC</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="trabajo1.1"
+                  title="Protección de la UEFI de mi PC"
+                  environment="web"
+                  feedback-link="https://github.com/gdomram487/Hardening/issues">
+    
+      <google-codelab-step label="Introducción" duration="2">
+        <h2 is-upgraded>Introducción</h2>
+<p>Vamos a configurar la UEFI de mi ordenador personal de sobremesa para añadirle la máxima seguridad posible al sistema y no se pueda manipular su arranque.<br>En este caso se trata de la siguiente placa base:<br><img alt="placamsi" src="img\b83f82ae90197320.png"><br>MSI B550-A PRO</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Contraseña administrador" duration="3">
+        <h2 is-upgraded>Establecer contraseña de administración de la UEFI</h2>
+<p>Establecemos una contraseña para que se solicite cuando se intente acceder a la configuración de la UEFI. Para establecer esta contraseña nos tendremos que dirigir a :</p>
+<ul>
+<li>Settings</li>
+<li>Security</li>
+<li>Administrator Password</li>
+</ul>
+<p class="image-container"><img alt="adminpassword" src="img\68e4726f445db0df.jpeg"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Contraseña de usuario" duration="3">
+        <h2 is-upgraded>Establecer contraseña de usuario de la UEFI</h2>
+<p>Vamos a establecer una contraseña de usuario para que se solicite en el proceso de boot de nuestro sistema.<br>Para establecer la contraseña de usuario tenemos que establecer prinmero la contraseña de administrador obligatoriamente. Una vez asignada la contraseña de administrador procedemos a establecer la contraseña de usuario, accediendo a:</p>
+<ul>
+<li>Settings</li>
+<li>Security</li>
+<li>User Password</li>
+</ul>
+<p class="image-container"><img alt="userpassword" src="img\54a79d1be1240e87.jpeg"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Arranque desde USB" duration="3">
+        <h2 is-upgraded>Permiso de arranque desde dispostivos USB</h2>
+<p>Con esta opción podemos denegar el acceso a dispostivos USB 3.0. Para configurar esto tenemos que acceder a:</p>
+<ul>
+<li>Settings</li>
+<li>Advanced</li>
+<li>USB Configuration</li>
+</ul>
+<p class="image-container"><img alt="usb" src="img\6e9a7a173c6e8afc.jpeg"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Orden de arranque" duration="3">
+        <h2 is-upgraded>Establecer boot order/orden de arranque</h2>
+<p>Ahora vamos a establecer un orden de arranque lógico para añadir seguridad al sistema. Para ello tendremos que seleccionar siempre en primer lugar el disco duro en el que tenemos instalado nuestro sistema operativo, dejando todos los posibles dispositivos externos en un lugar posterior para evitar que por ejemplo puedan introducir un DVD/CD (Live CD) que pueda corromper nuestro sistema.</p>
+<p class="image-container"><img alt="boot order" src="img\37e06f4dbea660ff.jpeg"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Secure Boot" duration="3">
+        <h2 is-upgraded>Activar Secure Boot en UEFI</h2>
+<p>Es muy importante que activemos la opción de Secure Boot en nuestra BIOS/UEFI para evitar la ejecución de software no firmado y de casi cualquier sistema operativo que no sea Windows. Para configurar Secure Boot en nuestra UEFI tenemos que acceder a:</p>
+<ul>
+<li>Settings</li>
+<li>Advanced</li>
+<li>Windows OS Configuration</li>
+<li>Secure Boot<br><img alt="secure boot" src="img\ae410620e008bbd2.jpeg"></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+
+</body>
+</html>

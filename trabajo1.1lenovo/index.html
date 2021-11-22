@@ -1,0 +1,113 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Protección de la BIOS de ordenador de simulador Lenovo</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="trabajo1.1lenovo"
+                  title="Protección de la BIOS de ordenador de simulador Lenovo"
+                  environment="web"
+                  feedback-link="https://github.com/gdomram487/Hardening/issues">
+    
+      <google-codelab-step label="Introducción" duration="2">
+        <h2 is-upgraded>Introducción</h2>
+<p>Vamos a configurar la BIOS de un workstation de la marca Lenovo y vamos a proceder a maximizar la seguridad del sistema modificando algunos parámetros de la BIOS para que no se pueda alterar su arranque.<br>En este caso se trata del siguiente Workstation:<br><img alt="pclenovo" src="img\42e446c7bc0def7a.jpg"><br>C20 Workstation (ThinkStation)</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Contraseña administrador" duration="3">
+        <h2 is-upgraded>Establecer contraseña de administración de la BIOS</h2>
+<p>Establecemos una contraseña para que se solicite cuando se intente acceder a la configuración de la BIOS. Para establecer esta contraseña nos tendremos que dirigir a :</p>
+<ul>
+<li>Security</li>
+<li>Set Passwords</li>
+<li>Set Administrator Password</li>
+</ul>
+<p class="image-container"><img alt="adminpassword" src="img\819a62931b9218a4.png"></p>
+<p>También podemos utilizar un lector de huellas para introducir la contraseña de la BIOS</p>
+<p class="image-container"><img alt="fingerprint" src="img\990f6ce713b522e2.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Contraseña de usuario" duration="3">
+        <h2 is-upgraded>Establecer contraseña de usuario de la BIOS</h2>
+<p>Vamos a establecer una contraseña de usuario para que se solicite en el proceso de boot de nuestro sistema. Podemos establecer la contraseña de usuario, accediendo a:</p>
+<ul>
+<li>Security</li>
+<li>Set Passwords</li>
+<li>Set User Password</li>
+</ul>
+<p class="image-container"><img alt="userpassword" src="img\6623302794b58718.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Arranque desde USB" duration="3">
+        <h2 is-upgraded>Permiso de arranque desde dispostivos USB</h2>
+<p>Con esta opción podemos deshabilitar los puertos USB de nuestro sistema. No existe una opción específica para deshabilitar el arranque por tanto tendremos que bloquear los puertos USB en su totalidad. Para configurar esto tenemos que acceder a:</p>
+<ul>
+<li>Devices</li>
+<li>USB Setup</li>
+<li>USB Support</li>
+</ul>
+<p class="image-container"><img alt="usb" src="img\f3418d79c38decd.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Orden de arranque" duration="3">
+        <h2 is-upgraded>Establecer orden de arranque</h2>
+<p>Ahora vamos a establecer un orden de arranque lógico para añadir seguridad al sistema. Para ello tendremos que seleccionar siempre en primer lugar el disco duro en el que tenemos instalado nuestro sistema operativo, dejando todos los posibles dispositivos externos en un lugar posterior para evitar que por ejemplo puedan introducir un DVD/CD (Live CD) que pueda corromper nuestro sistema.</p>
+<p class="image-container"><img alt="boot order" src="img\dbe104cdfe770279.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Secure Boot" duration="3">
+        <h2 is-upgraded>Activar Secure Boot en BIOS</h2>
+<p>En esta BIOS en concreto no contamos con la opción de activar Secure Boot.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="TPM" duration="3">
+        <h2 is-upgraded>Activar TPM en BIOS</h2>
+<p>El módulo TPM (Trusted Plataform Module) es una tecnología de cifrado de información para usuarios almacenada en un chip. Este chip es capaz de almacenar claves cifradas de datos confidenciales de usuarios del equipo para proteger la información.<br>Para activar esta opción tenemos que acceder a:</p>
+<ul>
+<li>TPM State</li>
+<li>Change TPM State</li>
+</ul>
+<p class="image-container"><img alt="tpm" src="img\8f258ddc40899032.png"></p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+
+</body>
+</html>

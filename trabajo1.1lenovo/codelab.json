@@ -1,0 +1,26 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2021-11-22T10:06:33+01:00",
+  "id": "trabajo1.1lenovo",
+  "duration": 20,
+  "title": "Protección de la BIOS de ordenador de simulador Lenovo",
+  "summary": "proteccion-de-bios",
+  "source": "bios2.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "bastionado",
+    "bios",
+    "seguridad"
+  ],
+  "tags": [
+    "web"
+  ],
+  "feedback": "https://github.com/gdomram487/Hardening/issues",
+  "url": "trabajo1.1lenovo"
+}
