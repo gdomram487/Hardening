@@ -1,0 +1,179 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>BRS - Trabajo 2</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="trabajo2"
+                  title="BRS - Trabajo 2"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="Introducción" duration="2">
+        <h2 is-upgraded>Introducción</h2>
+<p>Vamos a realizar una guía de la configuración básica de la siguiente topología de red, además configuraremos OSPF y la autenticación md5.</p>
+<p>La topología de la red es la siguiente:<br><img alt="topologia" src="img\7b18fea18daf648.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Configuración básica" duration="10">
+        <h2 is-upgraded>Configuración de interfaces</h2>
+<p>Configuramos las interfaces de todos los routers tanto las seriales como la interfaz de red que actuará como dhcp para los equipos de las distintas redes.<br>Introducimos el clock rate para las interfaces seriales del router 0 (128000).</p>
+<h3 is-upgraded>Router 0</h3>
+<pre><code>Router(config)#interface serial 0/1/0
+Router(config-if)#ip address 172.16.1.1 255.255.255.252
+Router(config-if)#clock rate 128000
+Router(config-if)#no shutdown
+
+</code></pre>
+<pre><code>Router(config)#interface serial 0/1/1
+Router(config-if)#ip address 172.16.2.1 255.255.255.252
+Router(config-if)#clock rate 128000
+Router(config-if)#no shutdown 
+
+</code></pre>
+<pre><code>Router(config)#interface serial 0/2/0
+Router(config-if)#ip address 172.16.3.1 255.255.255.252
+Router(config-if)#clock rate 128000
+Router(config-if)#no shutdown 
+
+</code></pre>
+<h3 is-upgraded>Router 1</h3>
+<pre><code>Router(config)#interface serial 0/1/0
+Router(config-if)#ip address 172.16.1.2 255.255.255.252
+Router(config-if)#no shutdown
+
+</code></pre>
+<pre><code>Router(config)#interface Gi0/0/0
+Router(config-if)#ip address 192.168.1.1 255.255.255.0
+Router(config-if)#no shutdown
+
+</code></pre>
+<h3 is-upgraded>Router 2</h3>
+<pre><code>Router(config)#interface serial 0/1/0
+Router(config-if)#ip address 172.16.2.2 255.255.255.252
+Router(config-if)#no shutdown
+
+</code></pre>
+<pre><code>Router(config)#interface Gi0/0/0
+Router(config-if)#ip address 192.168.2.1 255.255.255.0
+Router(config-if)#no shutdown
+
+</code></pre>
+<h3 is-upgraded>Router 3</h3>
+<pre><code>Router(config)#interface serial 0/1/0
+Router(config-if)#ip address 172.16.3.2 255.255.255.252
+Router(config-if)#no shutdown
+
+</code></pre>
+<pre><code>Router(config)#interface Gi0/0/0
+Router(config-if)#ip address 192.168.3.1 255.255.255.0
+Router(config-if)#no shutdown
+
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Configuración DHCP" duration="5">
+        <h2 is-upgraded>Router 1</h2>
+<pre><code>Router(config)#ip dhcp pool router1
+Router(dhcp-config)#network 192.168.1.0 255.255.255.0
+Router(dhcp-config)#default-router 192.168.1.1
+Router(dhcp-config)#exit
+Router(config)#ip dhcp excluded-address 192.168.1.1
+
+</code></pre>
+<h2 is-upgraded>Router 2</h2>
+<pre><code>Router(config)#ip dhcp pool router2
+Router(dhcp-config)#network 192.168.2.0 255.255.255.0
+Router(dhcp-config)#default-router 192.168.2.1
+Router(dhcp-config)#exit
+Router(config)#ip dhcp excluded-address 192.168.2.1
+
+</code></pre>
+<h2 is-upgraded>Router 3</h2>
+<pre><code>Router(config)#ip dhcp pool router3
+Router(dhcp-config)#network 192.168.3.0 255.255.255.0
+Router(dhcp-config)#default-router 192.168.3.1
+Router(dhcp-config)#exit
+Router(config)#ip dhcp excluded-address 192.168.3.1
+
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Configuración de OSPF y MD5" duration="7">
+        <h2 is-upgraded>Configuración de OSPF en cada Router</h2>
+<p>El ID de ospf será 1. Introducimos el nombre de la red de las diferentes redes que se encuentran en las interfaces de cada router.<br>Especificaremos la máscara wildcard para cada red junto con un area (area 0 en nuestro caso para todos)<br>Aplicamos la autenticación a todo el area 0.</p>
+<h3 is-upgraded>Router 0</h3>
+<pre><code>Router(config)#router ospf 1
+Router(config-router)#network 172.16.1.0 0.0.0.3 area 0
+Router(config-router)#network 172.16.2.0 0.0.0.3 area 0
+Router(config-router)#network 172.16.3.0 0.0.0.3 area 0
+Router(config-router)#area 0 authentication message-digest
+
+</code></pre>
+<h3 is-upgraded>Router 1</h3>
+<pre><code>Router(config)#router ospf 1
+Router(config-router)#network 172.16.1.0 0.0.0.3 area 0
+Router(config-router)#network 192.168.1.0 0.0.0.255 area 0
+Router(config-router)#passive-interface Gig0/0/0
+Router(config-router)#area 0 authentication message-digest
+
+</code></pre>
+<h3 is-upgraded>Router 2</h3>
+<pre><code>Router(config)#router ospf 1
+Router(config-router)#network 172.16.2.0 0.0.0.3 area 0
+Router(config-router)#network 192.168.2.0 0.0.0.255 area 0
+Router(config-router)#passive-interface Gig0/0/0
+Router(config-router)#area 0 authentication message-digest
+
+</code></pre>
+<h3 is-upgraded>Router 3</h3>
+<pre><code>Router(config)#router ospf 1
+Router(config-router)#network 172.16.3.0 0.0.0.3 area 0
+Router(config-router)#network 192.168.3.0 0.0.0.255 area 0
+Router(config-router)#passive-interface Gig0/0/0
+Router(config-router)#area 0 authentication message-digest
+
+</code></pre>
+<h2 is-upgraded>Configuración de MD5 en las interfaces</h2>
+<p>En nuestro caso la contraseña será ‘BRS-TRABAJO2&#39;<br>Introducimos los siguientes comandos para todas las interfaces que queremos proteger con autenticación md5:</p>
+<pre><code>Router(config-if)#ip ospf message-digest-key 1 md5 BRS-TRABAJO2
+Router(config-if)#ip ospf authentication message-digest
+
+</code></pre>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+
+</body>
+</html>

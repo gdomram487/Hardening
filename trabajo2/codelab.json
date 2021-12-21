@@ -1,0 +1,26 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2021-12-21T15:56:20+01:00",
+  "id": "trabajo2",
+  "duration": 24,
+  "title": "BRS - Trabajo 2",
+  "summary": "protocolo-de-enrutamiento-seguro",
+  "source": "BRS - Trabajo 2.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "bastionado",
+    "redes",
+    "ospf",
+    "md5"
+  ],
+  "tags": [
+    "web"
+  ],
+  "url": "trabajo2"
+}
